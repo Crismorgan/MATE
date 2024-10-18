@@ -671,11 +671,12 @@ def tta(args, config, train_writer=None):
                         losses.update([loss.item() * 1000])
                     else:
                         losses.update([loss.item() * 1000])
-
+                    '''
                     print_log(f'[TEST - {args.corruption}], Sample - {idx} / {total_batches},'
                               f'GradStep - {grad_step} / {args.grad_steps},'
                               f'Reconstruction Loss {[l for l in losses.val()]}',
                               logger=logger)
+                    '''
 
                 # now inferring on this one sample
                 base_model.eval()
@@ -690,7 +691,7 @@ def tta(args, config, train_writer=None):
                 test_pred.append(pred.detach())
                 test_label.append(target.detach())
 
-                if idx % 50 == 0:
+                if idx % 200 == 0:
                     test_pred_ = torch.cat(test_pred, dim=0)
                     test_label_ = torch.cat(test_label, dim=0)
 
